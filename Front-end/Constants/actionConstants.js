@@ -1,0 +1,3 @@
+export const GET_DAILIES = 'GET_DAILIES'
+export const COMPLETE_DAILIES = 'COMPLETE_DAILIES'
+export const CREATE_DAILY = 'CREATE_DAILY'
