@@ -2,10 +2,12 @@ import * as types from '../constants/actionConstants';
 
 const initialState = {
     dailies : [],
-    user : {}
+    user : {},
+    newDailyName: '',
+    newDailyDescription: ''
 }
 
-const dailiesReducer = (state = initialState, action) => {
+const DailyReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.GET_DAILIES: {
       return {
@@ -32,8 +34,26 @@ const dailiesReducer = (state = initialState, action) => {
         updatedDailies.push(newDaily);
         return {
             ...state,
-            dailies: updatedDailies
+            dailies: updatedDailies,
+            newDailyName: '',
+            newDailyDescription: ''
         }
+    }
+
+    case types.UPDATE_DAILYNAME: {
+      return {
+        ...state,
+        newDailyName: action.payload,
+      }
+    };
+
+    case types.UPDATE_DAILYDESCRIPTION: {
+      return {
+        ...state,
+        newDailyDescription: action.payload,
+      }
     }
   }
 }
+
+export default DailyReducer;

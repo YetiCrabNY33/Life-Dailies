@@ -6,16 +6,18 @@ import DailiesCreator from './DailiesCreator.jsx';
 
 const mapStateToProps = state => ({
     dailies: state.dailies,
-    userName: state.userName,
-    userExp: state.userExp,
-    questName: state.questName,
+    user: state.user,
+    newDailyName: state.newDailyName,
+    newDailyDescription: state.newDailyDescription
 })
 
 const mapDispatchToProps = dispatch => ({
     //Functions to dispatch
     createDaily: ( dailyObj ) => dispatch(action.addDailyActionCreator(dailyObj)),
     completeDaily: ( completed ) => dispatch(action.completeDailyActionCreator( completed )),
-    getDailies: ( dailies )=> dispatch(action.getDailiesActionCreator(dailies))
+    getDailies: ( dailies )=> dispatch(action.getDailiesActionCreator(dailies)),
+    updateDailyName: ( newDailyName ) => dispatch(action.updateDailyNameActionCreator(newDailyName)),
+    updateDailyDescription: ( newDailyDescription ) => dispatch(action.updateDailyDescriptionActionCreator(newDailyDescription))
 })
 
 class MainContainer extends Component {
@@ -24,7 +26,7 @@ class MainContainer extends Component {
   }
 
   async componentDidMount() {
-    const response = await fetch("")
+    const response = await fetch('/questList')
     const dailiesData = await response.json()
     //Logic to go through the dailies and use setState() to initialize state from database
     const dailies = dataHander(dailiesData);
@@ -35,8 +37,8 @@ class MainContainer extends Component {
     return(
       <div>
         <Profile userName={this.props.userName} userExp={this.props.userExp} />
-        <DailiesCreator createDaily={this.createDaily} dailies={this.dailies}/>
-        <DailiesContainer dalies={this.props.dailies} totalPending={this.state.totalPending} completedDaily={this.completeDaily}/>
+        <DailiesCreator createDaily={this.createDaily} newDailyName={this.props.newDailyDescription} newDailyDescription={this.props.newDailyName} updateDailyDescription = {this.updateDailyName} updateDailyName = {this.updateDailyName}/>
+        <DailiesContainer dailies={this.props.dailies} totalPending={this.state.totalPending} completedDaily={this.completeDaily}/>
       </div>
     )
   }
