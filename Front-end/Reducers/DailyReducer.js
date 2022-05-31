@@ -1,4 +1,4 @@
-import * as types from '../constants/actionConstants';
+import * as types from '../Constants/actionConstants';
 
 const initialState = {
     dailies : [],
@@ -13,7 +13,7 @@ const DailyReducer = (state = initialState, action) => {
       return {
         ...state,
         dailies: dailies
-      }
+      };
     }
 
     case types.COMPLETE_DAILY: {
@@ -43,16 +43,19 @@ const DailyReducer = (state = initialState, action) => {
     case types.UPDATE_DAILYNAME: {
       return {
         ...state,
-        newDailyName: action.payload,
+        newDailyName: newDailyName
       }
     };
 
     case types.UPDATE_DAILYDESCRIPTION: {
       return {
         ...state,
-        newDailyDescription: action.payload,
+        newDailyDescription: newDailyDescription
       }
     }
+
+    default: 
+    return initialState
   }
 }
 

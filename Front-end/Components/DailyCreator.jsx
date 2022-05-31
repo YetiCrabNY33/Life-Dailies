@@ -1,14 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class DailyCreator extends Component {
-    constructor (props) {
-        super(props)
-    }
+const DailyCreator = props => {
 
-    async createNewDaily(){
+    async function createNewDaily(){
         try{
             const dailyInfo = {questName: getState().newDailyName, qDescription: getState().newDailyDescription};
-            const response = await fetch('/addQuest', {
+            const response = await fetch('localhost:3000/addQuest', {
                 method: POST,
                 body: JSON.stringify(dailyInfo),
                 headers: {'Content-Type' : 'application/json'}
@@ -21,27 +18,29 @@ class DailyCreator extends Component {
         }
     }
 
-    render(){
-        return(
+    return (
             <div>
                 <form onSubmit= { createNewDaily }>
-                    <label>Quest Name:</label><input 
+                    <label>Quest Name:</label>
+                    <input 
+                    id = 'dailyNameInput'
                     type='text' 
                     placeholder='Name Of Your Quest' 
-                    value={this.props.newDailyName}
-                    onChange={ event => updateDailyName(event.target.value)}
+                    value={props.newDailyName}
+                    onChange={ (event) => props.updateDailyName(event.target.value)}
                     required />
-                    <label>Description:</label><input 
+                    <label>Description:</label>
+                    <input 
+                    id = 'dailyDescriptionInput'
                     type='text' 
                     placeholder='Describe Your Quest' 
-                    value={this.props.newDailyDescription}
-                    onChange={ event => updateDailyDescription(event.target.value)}
+                    value={props.newDailyDescription}
+                    onChange={ (event) => props.updateDailyDescription(event.target.value)}
                     required />
                     <button type = 'submit'>Create!</button>
                 </form>
             </div>
-        )
-    }
+    )
 }
 
 

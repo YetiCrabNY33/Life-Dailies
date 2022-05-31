@@ -12,16 +12,16 @@ export const getDailiesActionCreator = dailies => ({
 })
 
 export const completeDailyActionCreator = completed => ({
-    type: types.COMPLETE_DAILIES,
+    type: types.COMPLETE_DAILY,
     payload: completed
 })
 
 export const updateDailyDescriptionActionCreator = newDailyDescription => ({
   type: types.UPDATE_DAILYDESCRIPTION,
-  payload: newDailyDescription
+  payload: action.payload
 })
 
 export const updateDailyNameActionCreator = newDailyName => ({
   type: types.UPDATE_DAILYNAME,
-  payload: newDailyName
+  payload: action.payload
 })

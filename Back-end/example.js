@@ -1,7 +1,7 @@
 /**
  * Command for creating all four tables needed for the project, all at once.
  */
- const CREATE_TABLES = `\
+ /*const CREATE_TABLES = `\
  CREATE TABLE IF NOT EXISTS contestants (
    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
    name VARCHAR(50) UNIQUE NOT NULL,
@@ -50,7 +50,8 @@
  /**
   * Upserts into the contestants table. Both img_url and tech_bio_url can be null.
   */
- const UPSERT_CONTESTANTS = `\
+ 
+ /*const UPSERT_CONTESTANTS = `\
  INSERT INTO contestants (name, dating_bio, img_url, tech_bio_url)
  VALUES ($1, $2, $3, $4)
  ON CONFLICT (name) DO UPDATE SET
@@ -82,14 +83,14 @@
   * Ideally this, UPSERT_QUESTIONS, and UPSERT_ANSWERS would all be in the same query. I didn't have
   * time to figure out how to best navigate a triple-nested insert query.
   */
- const INSERT_ROUND_DETAILS = `\
+ /*const INSERT_ROUND_DETAILS = `\
  INSERT INTO round_details (contestant_id, question_id, answer_id)
  VALUES ($1, $2, $3);`;
  
  /**
   * Selects literally all data from the contestants table.
   */
- const SELECT_CONTESTANT = `\
+ /*const SELECT_CONTESTANT = `\
  SELECT *
  FROM contestants AS con
  WHERE con.name = $1;`;
@@ -99,7 +100,7 @@
   *
   * Example: queryText.insert.questions refers to INSERT_QUESTIONS.
   */
- const queryText = {
+ /*const queryText = {
    create: {
      tables: CREATE_TABLES,
      fullGameDate: SELECT_FULL_GAME_DATA,
@@ -120,4 +121,4 @@
  };
  
  export default queryText;
- 
+ */

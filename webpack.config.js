@@ -3,7 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: ['./Front-end/index.js'], //this is where webpack first looks to create the bundle.js file
+    entry: './Front-end/index.js', //this is where webpack first looks to create the bundle.js file
         //* if a file isn't connected to this through imports, it won't get bundled and therefore, is effectively unusable to the browser
     mode: 'development', // this allows us to connect to webpack's development server
     output: {
@@ -18,21 +18,21 @@ module.exports = {
             directory: path.join(__dirname, 'dist')
         },
         proxy: {
-          //tentatively we can call our backend stuff to /api/
-          '/api/**': {
+          //tentatively we can call our backend stuff to /api, --> this was changed to addQuest
+          '/addQuest/**': { //there's no API server receiver so I changed this to a default of addQuest so something is there
               target: 'http://localhost:3000',
               secure: false
           }
         }
     },
-    modules: {
+    module: {
         rules:[
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
-                    option: {
+                    options: {
                         presets: ['@babel/preset-env','@babel/preset-react']
                     }
                 }
@@ -46,7 +46,7 @@ module.exports = {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: './Front-end/index.html'
+        template: './index.html'
       })
     ],
     resolve: {

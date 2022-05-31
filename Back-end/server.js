@@ -1,24 +1,38 @@
 const express = require('express');
 const app = express(); //indicates this is the server
 const PORT = 3000;
+const path = require('path');
 const questHandler = require('./questHandler');
 const bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({extended: true})); // needed for POST requests which send data through the body using 'x-www-form-urlencoded' format
 app.use(express.json()); // needed to parse JSON objects that are sent through the server
+app.use(express.static(path.join(__dirname, './dist'))) //serve static files
 
-app.post('/addQuest/', //this quest is for 
+app.post('/addQuest/', //seems to be working successfully
   questHandler.addQuest,
   (req, res) => {
-    res.status(200).send(); // this should send a confirmation that a quest was added
-    // I'm not sure how to do this
+    res.status(200).send(res.locals.quest); // this sends back an object containing the quest that was just added
+    // quest = {questName: val, description: val, dueDate: val, rarity: val}
 });
 
 app.get('/questlist/',  //get request handler to retrieve the list of quests
   questHandler.questList,
   (req, res) => {
-    res.status(200).send(); 
+    res.status(200).json(res.locals.allQuests); 
+    console.log(res.locals.allQuests);
 });
+
+
+
+app.get('/profile',
+);
+
+app.patch('/completion',
+(req, res) => {
+  res.status(200).sendFile(); //send back object from database
+});
+
 
 //error handler in case client navigated away from used domains
 app.use((req, res)=> {

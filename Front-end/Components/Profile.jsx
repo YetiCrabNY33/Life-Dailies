@@ -6,10 +6,10 @@ import React from 'react';
 const Profile = props => {
   return (
     <div className='profile'>
-      <h5>{props.username}</h5>
-      <p>Current Quests: {props}</p>
-      <p>XP: {props.userExp}</p>
-      <p>Your adventure started: {props.signUpDate}</p>
+      <h3>Username: </h3>
+      <p>Current Quests: </p>
+      <p>XP: </p>
+      <p>Your adventure started:</p>
     </div>
   )
 }
